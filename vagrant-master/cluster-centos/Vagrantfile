@@ -1,0 +1,39 @@
+Vagrant.configure("2") do |config|
+    
+    # First virtual machine
+    config.vm.define "master" do |master|
+      master.vm.box = "centos/8"
+      master.vm.hostname = 'master'
+  
+      master.vm.provider :virtualbox do |v|
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--memory", 1024]
+        v.customize ["modifyvm", :id, "--name", "master"]
+      end
+    end
+
+    # Second virtual machine
+    config.vm.define "node1" do |node1|
+      node1.vm.box = "centos/8"
+      node1.vm.hostname = 'node1'
+  
+      node1.vm.provider :virtualbox do |v|
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--memory", 1024]
+        v.customize ["modifyvm", :id, "--name", "node1"]
+      end
+    end
+
+    # Third Virtual Machine
+    config.vm.define "node2" do |node2|
+      node2.vm.box = "centos/8"
+      node2.vm.hostname = 'node2'
+    
+      node2.vm.provider :virtualbox do |v|
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--memory", 1024]
+        v.customize ["modifyvm", :id, "--name", "node2"]
+      end
+    end
+
+  end
